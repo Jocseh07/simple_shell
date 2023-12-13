@@ -38,7 +38,6 @@ int simple_shell(void)
 		if (_strcmp("env", commands[0]) == 0)
 		{
 			print_env();
-			return (0);
 		}
 		exit_status = check_commands(commands);
 	}
