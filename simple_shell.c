@@ -5,7 +5,7 @@
  * Return: exit_status of the execution
  */
 
-int simple_shell(void)
+void simple_shell(void)
 {
 	char *input = NULL, **commands;
 	size_t length = 0, exit_status = 0;
@@ -13,14 +13,13 @@ int simple_shell(void)
 
 	while (1)
 	{
-		exit_status = 0;
 		if (isatty(0))
 			printf("$ ");
 		chars_read = getline(&input, &length, stdin);
 		if (chars_read == -1 || _strcmp("exit\n", input) == 0)
 		{
 			free(input);
-			break;
+			exit(0);
 		}
 		input[chars_read - 1] = '\0';
 		if (empty_line(input) == 0)
@@ -37,9 +36,10 @@ int simple_shell(void)
 		if (_strcmp("env", commands[0]) == 0)
 		{
 			print_env();
+			exit_status = 0;
 			continue;
 		}
 		exit_status = check_commands(commands);
 	}
-	return (exit_status);
+	exit(exit_status);
 }
