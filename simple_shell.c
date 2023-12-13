@@ -8,12 +8,11 @@
 int simple_shell(void)
 {
 	char *input = NULL, **commands;
-	size_t length = 0, exit_status = 0, skip = 0;
+	size_t length = 0, exit_status = 0;
 	ssize_t chars_read = 0;
 
 	while (1)
 	{
-		skip = 0;
 		if (isatty(0))
 			printf("$ ");
 		chars_read = getline(&input, &length, stdin);
@@ -26,22 +25,17 @@ int simple_shell(void)
 		if (empty_line(input) == 0)
 		{
 			exit_status = 0;
-			skip = 1;
+			continue;
 		}
 
-		if (skip == 0)
+		commands = parse_string(input, " ");
+		if (_strcmp("exit", commands[0]) == 0)
 		{
-			commands = parse_string(input, " ");
-			if (_strcmp("exit", commands[0]) == 0)
-			{
-				exit_status = atoi(commands[1]);
-				break;
-			}
-			else
-			{
-				exit_status = check_commands(commands);
-			}
+			exit_status = atoi(commands[1]);
+			break;
 		}
+
+		exit_status = check_commands(commands);
 	}
 	return (exit_status);
 }
