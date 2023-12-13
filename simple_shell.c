@@ -34,10 +34,10 @@ int simple_shell(void)
 			exit_status = atoi(commands[1]);
 			break;
 		}
-
 		if (_strcmp("env", commands[0]) == 0)
 		{
 			print_env();
+			continue;
 		}
 		exit_status = check_commands(commands);
 	}
