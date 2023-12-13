@@ -27,14 +27,12 @@ int simple_shell(void)
 			exit_status = 0;
 			continue;
 		}
-
 		commands = parse_string(input, " ");
 		if (_strcmp("exit", commands[0]) == 0)
 		{
 			exit_status = atoi(commands[1]);
 			break;
 		}
-
 		exit_status = check_commands(commands);
 	}
 	return (exit_status);
