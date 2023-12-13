@@ -8,7 +8,7 @@
 
 size_t check_commands(char **commands)
 {
-	size_t exit_status = 0, skip = 0, a = 1;
+	size_t exit_status = 0, skip = 0, a = 1, b;
 
 	if (_strcmp("echo", commands[0]) == 0)
 	{
@@ -28,10 +28,13 @@ size_t check_commands(char **commands)
 		for (a = 1; commands[a]; a++)
 		{
 			if (_strcmp("#", commands[a]) == 0)
-				commands = check_comments(commands, a);
-			else if (_strcmp(";", commands[a]) == 0)
 			{
-				commands = check_handler1(commands, a);
+				b = a;
+				while (commands[b])
+				{
+					commands[b] = NULL;
+					b++;
+				}
 			}
 		}
 		if (commands[0] != NULL)
