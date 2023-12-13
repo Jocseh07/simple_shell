@@ -21,7 +21,7 @@ char *_strcat(char *dest, char *src);
 char *_strcpy(char *dest, char *src);
 int _strlen(char *s);
 int simple_shell(void);
-int check_command(char *command);
+size_t check_commands(char **command);
 
 extern char **environ;
 
