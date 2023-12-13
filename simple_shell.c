@@ -36,14 +36,7 @@ void simple_shell(void)
 			exit_status = 0;
 			continue;
 		}
-		if (_strcmp("echo", commands[0]) == 0)
-		{
-			if (_strcmp("$?", commands[1]) == 0)
-				printf("%ld\n", exit_status);
-			if (_strcmp("$$", commands[1]) == 0)
-				printf("%d\n", getpid());
-			continue;
-		}
+
 		exit_status = check_commands(commands);
 	}
 	exit(exit_status);
