@@ -36,7 +36,6 @@ void simple_shell(void)
 			exit_status = 0;
 			continue;
 		}
-
 		exit_status = check_commands(commands);
 	}
 	exit(exit_status);
