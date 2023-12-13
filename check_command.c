@@ -13,7 +13,7 @@ size_t check_commands(char **commands)
 	if (_strcmp("env", commands[0]) == 0)
 	{
 		print_env();
-		return;
+		return (0);
 	}
 	commands[0] = get_path(commands[0]);
 	if (commands[0] != NULL)

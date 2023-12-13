@@ -13,6 +13,7 @@ int simple_shell(void)
 
 	while (1)
 	{
+		exit_status = 0;
 		if (isatty(0))
 			printf("$ ");
 		chars_read = getline(&input, &length, stdin);
