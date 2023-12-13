@@ -12,6 +12,7 @@ int main(__attribute__((unused)) int ac, __attribute__((unused)) char **av)
 	size_t exit_status = 0;
 	int r, file;
 	char *buffer;
+	int skip = 0;
 
 	if (ac == 2)
 	{
@@ -26,7 +27,8 @@ int main(__attribute__((unused)) int ac, __attribute__((unused)) char **av)
 		}
 	}
 
-	exit_status = simple_shell();
+	if (skip == 0)
+		exit_status = simple_shell();
 
 	return (exit_status);
 }

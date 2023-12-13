@@ -9,18 +9,20 @@
 
 char **parse_string(char *input, char *sep)
 {
-	char **parsed_string;
-	int b = 0;
+	char **parsed_string = NULL;
+	char *token;
+	int size = 64, b = 0;
 
-	parsed_string = calloc(64, sizeof(char *));
+	parsed_string = calloc(size, sizeof(char *));
 	if (parsed_string == NULL)
 		return (NULL);
 
-	parsed_string[b++] = strtok(input, sep);
+	token = strtok(input, sep);
 
-	while (strtok(NULL, sep))
+	while (token != NULL)
 	{
-		parsed_string[b] = strtok(NULL, sep);
+		parsed_string[b] = token;
+		token = strtok(NULL, sep);
 		b++;
 	}
 

@@ -8,14 +8,15 @@
 
 int execute(char **commands)
 {
-	pid_t c_id;
-	int wstatus;
+	int c_id;
+	int wstatus, n;
 
 	c_id = fork();
 
 	if (c_id == 0)
 	{
-		if (execve(commands[0], commands, environ) == -1)
+		n = execve(commands[0], commands, environ);
+		if (n == -1)
 			perror("Execve");
 	}
 	else
