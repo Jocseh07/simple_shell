@@ -29,14 +29,19 @@ void simple_shell(void)
 		}
 		commands = parse_string(input, " ");
 		if (_strcmp("exit", commands[0]) == 0)
-		{
-			exit_status = atoi(commands[1]);
-			break;
-		}
+			exit(atoi(commands[1]));
 		if (_strcmp("env", commands[0]) == 0)
 		{
 			print_env();
 			exit_status = 0;
+			continue;
+		}
+		if (_strcmp("echo", commands[0]) == 0)
+		{
+			if (_strcmp("$?", commands[1]) == 0)
+				printf("%ld\n", exit_status);
+			if (_strcmp("$$", commands[1]) == 0)
+				printf("%d\n", getpid());
 			continue;
 		}
 		exit_status = check_commands(commands);
