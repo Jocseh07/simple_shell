@@ -6,11 +6,8 @@
 
 void print_env(void)
 {
-	int a = 0;
+	char **s = environ;
 
-	while (environ[a])
-	{
-		printf("%s\n", environ[a]);
-		a++;
-	}
+	for (; *s; s++)
+		printf("%s\n", *s);
 }

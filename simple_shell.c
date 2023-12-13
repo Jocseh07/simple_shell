@@ -13,7 +13,6 @@ int simple_shell(void)
 
 	while (1)
 	{
-		exit_status = 0;
 		if (isatty(0))
 			printf("$ ");
 		chars_read = getline(&input, &length, stdin);
@@ -37,6 +36,7 @@ int simple_shell(void)
 		if (_strcmp("env", commands[0]) == 0)
 		{
 			print_env();
+			exit_status = 0;
 			continue;
 		}
 		exit_status = check_commands(commands);
