@@ -8,7 +8,7 @@
 void simple_shell(void)
 {
 	char *input = NULL, **commands;
-	size_t length = 0, exit_status = 0, n = 0;
+	size_t length = 0, exit_status = 0;
 	ssize_t chars_read = 0;
 
 	while (1)
@@ -29,13 +29,7 @@ void simple_shell(void)
 		}
 		commands = parse_string(input, " ");
 		if (_strcmp("exit", commands[0]) == 0)
-		{
-			if (commands[1])
-				n = atoi(commands[1]);
-			free(commands);
-			free(input);
-			exit(n);
-		}
+			check_exit(commands, input);
 		if (_strcmp("env", commands[0]) == 0)
 		{
 			print_env();
