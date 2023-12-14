@@ -14,6 +14,9 @@ char *get_path(char *command)
 	int i = 0, length = 0;
 	struct stat info;
 
+	if (stat(command, &info) == 0)
+		return (command);
+
 	path = malloc(_strlen(env_path) + 1);
 	if (path == NULL)
 		return (NULL);
