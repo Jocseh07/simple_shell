@@ -14,14 +14,12 @@ char *get_path(char *command)
 	int i = 0, length = 0;
 	struct stat info;
 
-	if (stat(command, &info) == 0)
-		return (command);
-
 	path = malloc(_strlen(env_path) + 1);
 	if (path == NULL)
 		return (NULL);
-	path = strcpy(path, env_path);
+	path = strdup(env_path);
 	parsed_string = parse_string(path, ":");
+	free(path);
 
 	for (i = 0; parsed_string[i]; i++)
 	{
@@ -36,14 +34,15 @@ char *get_path(char *command)
 			break;
 	}
 
-	free(path);
-
 	if (parsed_string[i] == NULL)
 	{
 		free(parsed_string);
 		return (NULL);
 	}
 
-	free(parsed_string);
 	return (actual_path);
 }
+
+/**
+ * /home/muturi/.console-ninja/.bin:/bin:/usr/bin:/sbin:/usr/sbin:/usr/local/bin
+ */
