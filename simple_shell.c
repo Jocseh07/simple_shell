@@ -34,6 +34,7 @@ void simple_shell(void)
 		{
 			print_env();
 			exit_status = 0;
+			free(commands);
 			continue;
 		}
 		exit_status = check_commands(commands);
