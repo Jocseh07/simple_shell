@@ -42,7 +42,3 @@ char *get_path(char *command)
 
 	return (actual_path);
 }
-
-/**
- * /home/muturi/.console-ninja/.bin:/bin:/usr/bin:/sbin:/usr/sbin:/usr/local/bin
- */
