@@ -3,6 +3,7 @@
 /**
  * check_exit - checks the exit code
  * @commands: where to check the exit codes
+ * @input: char * to free
  * Return: None
  */
 
@@ -14,14 +15,12 @@ void check_exit(char **commands, char *input)
 		n = atoi(commands[1]);
 	else
 	{
-		fprintf(stderr, "exit: Illegal number: %d\n", n);
 		exit(1);
 	}
 	free(commands);
 	free(input);
 	if (n < 0)
 	{
-		fprintf(stderr, "exit: Illegal number: %d\n", n);
 		exit(1);
 	}
 	else
