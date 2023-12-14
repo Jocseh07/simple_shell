@@ -12,9 +12,8 @@ char *get_path(char *command)
 	char **parsed_string;
 	char *actual_path = NULL;
 	int i = 0, length = 0;
-	struct stat info;
 
-	if (stat(command, &info) == 0)
+	if (access(command, F_OK) == 0)
 		return (command);
 
 	path = malloc(_strlen(env_path) + 1);
@@ -33,7 +32,7 @@ char *get_path(char *command)
 
 		actual_path = strcat(parsed_string[i], command);
 
-		if (stat(actual_path, &info) == 0)
+		if (access(actual_path, F_OK) == 0)
 			break;
 	}
 
