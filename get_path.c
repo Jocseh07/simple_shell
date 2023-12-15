@@ -19,7 +19,9 @@ char *get_path(char *command)
 	path = strdup(env_path);
 	if (path == NULL)
 		return (NULL);
+
 	parsed_string = parse_string(path, ":");
+
 	free(path);
 	for (i = 0; parsed_string[i]; i++)
 	{
