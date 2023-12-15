@@ -9,7 +9,6 @@ void simple_shell(void)
 {
 	char *input = NULL, **commands;
 	size_t length = 0, exit_status = 0;
-	int n = 0;
 	ssize_t chars_read = 0;
 
 	while (1)
@@ -20,7 +19,7 @@ void simple_shell(void)
 		if (chars_read == -1 || strcmp("exit\n", input) == 0)
 		{
 			free(input);
-			exit(0);
+			break;
 		}
 		input[chars_read - 1] = '\0';
 		if (empty_line(input) == 0)
@@ -32,10 +31,10 @@ void simple_shell(void)
 
 		if (strcmp("exit", commands[0]) == 0)
 		{
-			n = atoi(commands[1]);
+			exit_status = atoi(commands[1]);
 			free(input);
 			free(commands);
-			exits(n);
+			break;
 		}
 		if (strcmp("env", commands[0]) == 0)
 		{
@@ -46,5 +45,5 @@ void simple_shell(void)
 		}
 		exit_status = check_commands(commands);
 	}
-	exit(exit_status);
+	exits(exit_status);
 }
