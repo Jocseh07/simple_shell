@@ -21,14 +21,13 @@ char *get_path(char *command)
 		return (NULL);
 	parsed_string = parse_string(path, ":");
 	free(path);
-
 	for (i = 0; parsed_string[i]; i++)
 	{
 		length = strlen(parsed_string[i]);
 		actual_path = malloc(length + strlen(command) + 2);
 		if (actual_path == NULL)
 		{
-			freess(parsed_string);
+			free(parsed_string);
 			return (NULL);
 		}
 		strcpy(actual_path, parsed_string[i]);
@@ -39,7 +38,8 @@ char *get_path(char *command)
 		if (access(actual_path, F_OK) == 0)
 			break;
 		free(actual_path);
+		actual_path = NULL;
 	}
-	freess(parsed_string);
+	free(parsed_string);
 	return (actual_path);
 }
