@@ -8,10 +8,11 @@
 
 void exits(int n)
 {
-	if (!n)
-		perror("Error");
+	printf("test");
+	if (n == 0)
+		exit(EXIT_FAILURE);
 	else if (n < 0)
-		perror("Error");
+		exit(EXIT_FAILURE);
 	else
 		exit(n);
 }
