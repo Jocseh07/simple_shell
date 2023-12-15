@@ -18,7 +18,7 @@ char *get_path(char *command)
 
 	path = strdup(env_path);
 	if (path == NULL)
-		return NULL;
+		return (NULL);
 	parsed_string = parse_string(path, ":");
 	free(path);
 
@@ -29,7 +29,7 @@ char *get_path(char *command)
 		if (actual_path == NULL)
 		{
 			freess(parsed_string);
-			return NULL;
+			return (NULL);
 		}
 		strcpy(actual_path, parsed_string[i]);
 		if (actual_path[length - 1] != '/')
