@@ -10,9 +10,9 @@ void exits(int n)
 {
 	printf("test");
 	if (n == 0)
-		exit(EXIT_FAILURE);
+		exit(1);
 	else if (n < 0)
-		exit(EXIT_FAILURE);
+		exit(1);
 	else
 		exit(n);
 }
