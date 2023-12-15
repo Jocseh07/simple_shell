@@ -19,26 +19,29 @@ char *get_path(char *command)
 	path = strdup(env_path);
 	if (path == NULL)
 		return (NULL);
-	parsed_string = parse_string(path, ":");
+	parsed_string = parse_string(env_path, ":");
 	free(path);
 	for (i = 0; parsed_string[i]; i++)
 	{
-		length = strlen(parsed_string[i]);
-		actual_path = malloc(length + strlen(command) + 2);
-		if (actual_path == NULL)
+		if (parsed_string[i] != NULL)
 		{
-			free(parsed_string);
-			return (NULL);
-		}
-		strcpy(actual_path, parsed_string[i]);
-		if (actual_path[length - 1] != '/')
-			strcat(actual_path, "/");
-		strcat(actual_path, command);
+			length = strlen(parsed_string[i]);
+			actual_path = malloc(length + strlen(command) + 2);
+			if (actual_path == NULL)
+			{
+				free(parsed_string);
+				return (NULL);
+			}
+			strcpy(actual_path, parsed_string[i]);
+			if (actual_path[length - 1] != '/')
+				strcat(actual_path, "/");
+			strcat(actual_path, command);
 
-		if (access(actual_path, X_OK) == 0)
-			break;
-		free(actual_path);
-		actual_path = NULL;
+			if (access(actual_path, X_OK) == 0)
+				break;
+			free(actual_path);
+			actual_path = NULL;
+		}
 	}
 	free(parsed_string);
 	return (actual_path);

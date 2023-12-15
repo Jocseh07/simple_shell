@@ -8,7 +8,7 @@
 
 size_t check_commands(char **commands)
 {
-	size_t exit_status = 0, skip = 0, a = 1, b = 0;
+	size_t exit_status = 0, skip = 0, a = 1, b = 0, z = 0;
 	char *actual_path = NULL;
 
 	if ((_strcmp("echo", commands[0]) == 0) && (commands[1] != NULL))
@@ -25,8 +25,9 @@ size_t check_commands(char **commands)
 	}
 	if (skip == 0)
 	{
-		actual_path = get_path(commands[0]);
-		commands[0] = strdup(actual_path);
+
+		commands[0] = get_path(commands[0]);
+
 		free(actual_path);
 		for (a = 1; commands[a]; a++)
 		{
@@ -39,6 +40,12 @@ size_t check_commands(char **commands)
 					b++;
 				}
 			}
+		}
+		if (commands[1])
+		{
+			for (z = 0; commands[1][z]; z++)
+				putchar(commands[1][z]);
+			putchar('\n');
 		}
 		if (commands[0] != NULL)
 			exit_status = execute(commands);

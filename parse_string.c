@@ -10,21 +10,21 @@
 char **parse_string(char *input, char *sep)
 {
 	char **parsed_string = NULL;
-	char *token;
-	int size = 64, b = 0;
+	char *actual_token;
+	int b = 0;
 
-	parsed_string = calloc(size, sizeof(char *));
+	parsed_string = calloc(64, sizeof(char *));
 	if (parsed_string == NULL)
 		return (NULL);
 
-	token = strtok(input, sep);
+	actual_token = strtok(input, sep);
 
-	while (token != NULL)
+	while (actual_token != NULL)
 	{
-		parsed_string[b] = token;
-		token = strtok(NULL, sep);
+		parsed_string[b] = actual_token;
+		actual_token = strtok(NULL, sep);
 		b++;
 	}
-	free(token);
+	free(actual_token);
 	return (parsed_string);
 }
