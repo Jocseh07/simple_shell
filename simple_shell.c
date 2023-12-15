@@ -16,7 +16,7 @@ void simple_shell(void)
 		if (isatty(0))
 			printf("$ ");
 		chars_read = getline(&input, &length, stdin);
-		if (chars_read == -1 || _strcmp("exit\n", input) == 0)
+		if (chars_read == -1 || strcmp("exit\n", input) == 0)
 		{
 			free(input);
 			exit(0);
@@ -28,9 +28,9 @@ void simple_shell(void)
 			continue;
 		}
 		commands = parse_string(input, " ");
-		if (_strcmp("exit", commands[0]) == 0)
+		if (strcmp("exit", commands[0]) == 0)
 			exit(atoi(commands[1]));
-		if (_strcmp("env", commands[0]) == 0)
+		if (strcmp("env", commands[0]) == 0)
 		{
 			print_env();
 			exit_status = 0;

@@ -17,7 +17,7 @@ char *get_path(char *command)
 	if (stat(command, &info) == 0)
 		return (command);
 
-	path = malloc(_strlen(env_path) + 1);
+	path = malloc(strlen(env_path) + 1);
 	if (path == NULL)
 		return (NULL);
 	path = strcpy(path, env_path);
@@ -25,7 +25,7 @@ char *get_path(char *command)
 
 	for (i = 0; parsed_string[i]; i++)
 	{
-		length = _strlen(parsed_string[i]);
+		length = strlen(parsed_string[i]);
 
 		if (parsed_string[i][length - 1] != '/')
 			actual_path = strcat(parsed_string[i], "/");

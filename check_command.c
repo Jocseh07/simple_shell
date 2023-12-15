@@ -10,14 +10,14 @@ size_t check_commands(char **commands)
 {
 	size_t exit_status = 0, skip = 0, a = 1, b;
 
-	if (_strcmp("echo", commands[0]) == 0)
+	if (strcmp("echo", commands[0]) == 0)
 	{
 		skip = 1;
-		if (_strcmp("$?", commands[1]) == 0)
+		if (strcmp("$?", commands[1]) == 0)
 			printf("%ld\n", exit_status);
-		else if (_strcmp("$$", commands[1]) == 0)
+		else if (strcmp("$$", commands[1]) == 0)
 			printf("%d\n", getpid());
-		else if (_strcmp("$PATH", commands[1]) == 0)
+		else if (strcmp("$PATH", commands[1]) == 0)
 			printf("%s\n", get_env("PATH"));
 		else
 			skip = 0;
@@ -27,7 +27,7 @@ size_t check_commands(char **commands)
 		commands[0] = get_path(commands[0]);
 		for (a = 1; commands[a]; a++)
 		{
-			if (_strcmp("#", commands[a]) == 0)
+			if (strcmp("#", commands[a]) == 0)
 			{
 				b = a;
 				while (commands[b])
