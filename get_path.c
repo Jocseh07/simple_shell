@@ -13,7 +13,7 @@ char *get_path(char *command)
 	char *actual_path = NULL;
 	int i = 0, length = 0;
 
-	if (access(command, F_OK) == 0)
+	if (access(command, R_OK & X_OK) == 0)
 		return (command);
 
 	path = strdup(env_path);
@@ -35,7 +35,7 @@ char *get_path(char *command)
 			strcat(actual_path, "/");
 		strcat(actual_path, command);
 
-		if (access(actual_path, F_OK) == 0)
+		if (access(actual_path, X_OK) == 0)
 			break;
 		free(actual_path);
 		actual_path = NULL;
