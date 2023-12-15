@@ -25,6 +25,6 @@ char **parse_string(char *input, char *sep)
 		token = strtok(NULL, sep);
 		b++;
 	}
-
+	free(token);
 	return (parsed_string);
 }

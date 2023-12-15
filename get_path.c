@@ -8,7 +8,7 @@
 
 char *get_path(char *command)
 {
-	char *env_path = get_env("PATH"), *path;
+	char *env_path = getenv("PATH"), *path = NULL;
 	char **parsed_string;
 	char *actual_path = NULL;
 	int i = 0, length = 0;
@@ -16,31 +16,30 @@ char *get_path(char *command)
 	if (access(command, F_OK) == 0)
 		return (command);
 
-	path = malloc(_strlen(env_path) + 1);
-	if (path == NULL)
-		return (NULL);
 	path = strdup(env_path);
+	if (path == NULL)
+		return NULL;
 	parsed_string = parse_string(path, ":");
 	free(path);
 
 	for (i = 0; parsed_string[i]; i++)
 	{
-		length = _strlen(parsed_string[i]);
-
-		if (parsed_string[i][length - 1] != '/')
-			actual_path = strcat(parsed_string[i], "/");
-
-		actual_path = strcat(parsed_string[i], command);
+		length = strlen(parsed_string[i]);
+		actual_path = malloc(length + strlen(command) + 2);
+		if (actual_path == NULL)
+		{
+			freess(parsed_string);
+			return NULL;
+		}
+		strcpy(actual_path, parsed_string[i]);
+		if (actual_path[length - 1] != '/')
+			strcat(actual_path, "/");
+		strcat(actual_path, command);
 
 		if (access(actual_path, F_OK) == 0)
 			break;
+		free(actual_path);
 	}
-
-	if (parsed_string[i] == NULL)
-	{
-		free(parsed_string);
-		return (NULL);
-	}
-
+	freess(parsed_string);
 	return (actual_path);
 }
