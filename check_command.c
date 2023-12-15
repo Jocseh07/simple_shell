@@ -24,8 +24,7 @@ size_t check_commands(char **commands)
 	}
 	if (skip == 0)
 	{
-		commands[0] = get_path(commands[0]);
-		for (a = 1; commands[a]; a++)
+		for (a = 0; commands[a]; a++)
 		{
 			if (commands[a][0] == '#')
 			{
@@ -38,9 +37,14 @@ size_t check_commands(char **commands)
 			}
 		}
 		if (commands[0] != NULL)
-			exit_status = execute(commands);
-		else
-			perror("Path Error");
+		{
+			commands[0] = get_path(commands[0]);
+			if (commands[0] != NULL)
+				exit_status = execute(commands);
+			else
+				perror("Path Error");
+		}
+
 		free(commands);
 	}
 	return (exit_status);
