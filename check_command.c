@@ -26,7 +26,7 @@ size_t check_commands(char **commands)
 	if (skip == 0)
 	{
 		actual_path = get_path(commands[0]);
-		commands[0] = actual_path;
+		commands[0] = strdup(actual_path);
 		free(actual_path);
 		for (a = 1; commands[a]; a++)
 		{
@@ -44,6 +44,7 @@ size_t check_commands(char **commands)
 			exit_status = execute(commands);
 		else
 			perror("Path Error");
+		free(commands[0]);
 		free(commands);
 	}
 	return (exit_status);
