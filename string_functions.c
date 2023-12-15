@@ -36,3 +36,19 @@ char *_strcpy(char *dest, char *src)
 {
 	return (strcpy(dest, src));
 }
+
+/**
+ * _strlen - returns the length of a string
+ * @s: string to get the length
+ * Return: length of the string
+ */
+
+int _strlen(char *s)
+{
+	int a = 0;
+
+	while (s[a] != '\0')
+		a++;
+
+	return (a);
+}

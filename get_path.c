@@ -8,44 +8,42 @@
 
 char *get_path(char *command)
 {
-	char *env_path = get_env("PATH"), *path = NULL;
+	char *env_path = get_env("PATH"), *path;
 	char **parsed_string;
 	char *actual_path = NULL;
 	int i = 0, length = 0;
+	struct stat info;
 
-	if (access(command, R_OK & X_OK) == 0)
+	if (stat(command, &info) == 0)
 		return (command);
 
-	path = strdup(env_path);
+	path = malloc(_strlen(env_path) + 1);
 	if (path == NULL)
 		return (NULL);
-
+	path = strcpy(path, env_path);
 	parsed_string = parse_string(path, ":");
 
-	free(path);
 	for (i = 0; parsed_string[i]; i++)
 	{
-		actual_path = NULL;
+		length = _strlen(parsed_string[i]);
 
-		length = strlen(parsed_string[i]);
-		actual_path = malloc(length + strlen(command) + 2);
-		if (actual_path == NULL)
-		{
-			free(parsed_string);
-			return (NULL);
-		}
-		strcpy(actual_path, parsed_string[i]);
-		if (actual_path[length - 1] != '/')
-			strcat(actual_path, "/");
-		strcat(actual_path, command);
+		if (parsed_string[i][length - 1] != '/')
+			actual_path = strcat(parsed_string[i], "/");
 
-		if (access(actual_path, X_OK) == 0)
+		actual_path = strcat(parsed_string[i], command);
+
+		if (stat(actual_path, &info) == 0)
 			break;
-		free(actual_path);
-		actual_path = NULL;
 	}
-	free(parsed_string);
-	if (actual_path == NULL)
+
+	free(path);
+
+	if (parsed_string[i] == NULL)
+	{
+		free(parsed_string);
 		return (NULL);
+	}
+
+	free(parsed_string);
 	return (actual_path);
 }

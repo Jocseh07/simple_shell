@@ -21,7 +21,6 @@ void simple_shell(void)
 			free(input);
 			exit(0);
 		}
-
 		input[chars_read - 1] = '\0';
 		if (empty_line(input) == 0)
 		{
@@ -30,7 +29,7 @@ void simple_shell(void)
 		}
 		commands = parse_string(input, " ");
 		if (_strcmp("exit", commands[0]) == 0)
-			check_exit(commands, input);
+			exit(atoi(commands[1]));
 		if (_strcmp("env", commands[0]) == 0)
 		{
 			print_env();
@@ -38,7 +37,6 @@ void simple_shell(void)
 			free(commands);
 			continue;
 		}
-
 		exit_status = check_commands(commands);
 	}
 	exit(exit_status);
