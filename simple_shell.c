@@ -34,7 +34,7 @@ void simple_shell(void)
 			exit_status = atoi(commands[1]);
 			free(input);
 			free(commands);
-			break;
+			exits(exit_status);
 		}
 		if (strcmp("env", commands[0]) == 0)
 		{
@@ -45,5 +45,5 @@ void simple_shell(void)
 		}
 		exit_status = check_commands(commands);
 	}
-	exits(exit_status);
+	exit(exit_status);
 }
