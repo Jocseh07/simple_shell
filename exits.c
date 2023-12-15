@@ -8,7 +8,6 @@
 
 void exits(int n)
 {
-	printf("test");
 	if (n == 0)
 		exit(1);
 	else if (n < 0)
