@@ -9,7 +9,7 @@ void simple_shell(void)
 {
 	char *input = NULL, **commands;
 	size_t length = 0, exit_status = 0;
-	int n = 0, a = 0;
+	int n = 0;
 	ssize_t chars_read = 0;
 
 	while (1)
