@@ -27,7 +27,7 @@ size_t check_commands(char **commands)
 		commands[0] = get_path(commands[0]);
 		for (a = 1; commands[a]; a++)
 		{
-			if (strcmp("#", commands[a]) == 0)
+			if (commands[a][0] == '#')
 			{
 				b = a;
 				while (commands[b])
