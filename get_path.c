@@ -8,7 +8,7 @@
 
 char *get_path(char *command)
 {
-	char *env_path = getenv("PATH"), *path = NULL;
+	char *env_path = get_env("PATH"), *path = NULL;
 	char **parsed_string;
 	char *actual_path = NULL;
 	int i = 0, length = 0;
